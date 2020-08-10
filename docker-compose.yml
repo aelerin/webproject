@@ -1,0 +1,29 @@
+version: '3'
+
+services: 
+    userDb:
+        image: mariadb
+        environment: 
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: users
+        ports: 
+            - "3306:3306"
+        volumes:
+            - ./webservices/database:/docker-entrypoint-initdb.d:ro
+
+    webservices:
+            build:
+                context: ./webservices/src
+                dockerfile: Dockerfile
+            environment: 
+                FLASK_ENV: development
+                FLASK_APP: app.py
+            ports:
+                - '5000:5000'
+
+    site_web:
+        build:
+            context: ./Webapp
+            dockerfile: Dockerfile
+        ports: 
+            - "80:80"
