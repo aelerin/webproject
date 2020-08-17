@@ -62,7 +62,7 @@ function Remove(button) {
         table.deleteRow(row.rowIndex);
 
         //Delete row in object
-        fetch('http://127.0.0.1:5000/api/users/' + tag,
+        fetch('http://192.168.99.100:5000/api/users' + tag,
             { method: 'DELETE', })
             .then(
                 res => this.setState({ jsonReturnedValue: json })

@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from controlers.user_controler import UsersControler
-from flask_login import LoginManager
+# from flask_login import LoginManager
 
 # initialisation de l'application Flask
 app = Flask(__name__)
@@ -15,11 +15,11 @@ db = SQLAlchemy(app)
 # mise en place du controlleur pour les users
 UsersControler.register(app)
 
-#login manager
-login_manager = LoginManager()
-login_manager.init_app(app) # app is a Flask object
+# #login manager
+# login_manager = LoginManager()
+# login_manager.init_app(app) # app is a Flask object
 
-app.secret_key = 'some secret key'
+# app.secret_key = 'some secret key'
 # lancement de l'application
 if __name__ == "__main__":
     app.run(debug=True)

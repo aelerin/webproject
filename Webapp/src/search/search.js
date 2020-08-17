@@ -4,7 +4,7 @@ let utilisateur = [
 
 
 const getUsers = () => {
-    fetch('http://127.0.0.1:5000/api/users').then(resp => resp.json()).then(users => renderUsers(users))
+    fetch('http://192.168.99.100:5000/api/users').then(resp => resp.json()).then(users => renderUsers(users))
 }
 
 const renderUsers = (users) => {

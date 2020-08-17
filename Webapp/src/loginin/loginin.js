@@ -18,7 +18,7 @@ const connexion = (event) => {
     //     if (users.pseudo == event.target[0].value && users.password == event.target[1].value) {
     // if (confirm("Felicitations, vous êtes maintenant connecter")) {
     //     window.location.href = "../accueil.html";
-    fetch('http://127.0.0.1:5000/api/users/login', {
+    fetch('http://192.168.99.100:5000/api/users/login', {
         method: 'POST',
         body: JSON.stringify(utilisateur),
         headers: {
@@ -27,7 +27,7 @@ const connexion = (event) => {
 
     })
         .then(res => res.json())
-        .then(res => window.location.replace(res["url"]));
+        .then(res => window.location.replace(res["url"]));  // A modifié
 
 }
 //         }

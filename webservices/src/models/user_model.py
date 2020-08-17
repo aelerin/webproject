@@ -8,12 +8,12 @@ db = SQLAlchemy()
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    nom = db.Column(db.String)
-    prenom = db.Column(db.String)
-    naissance = db.Column(db.String)
-    email = db.Column(db.String, unique=True)
-    login = db.Column(db.String, unique=True)
-    password = db.Column(db.String)
+    nom = db.Column(db.String, nullable=False)
+    prenom = db.Column(db.String, nullable=False)
+    naissance = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, unique=True, nullable=False)
+    login = db.Column(db.String, unique=True, nullable=False)
+    password = db.Column(db.String nullable=False)
 
     def __init__(self, nom, prenom, naissance, email, login, password):
         self.nom = nom

@@ -9,7 +9,7 @@ const send = (event) => {
         utilisateur[event.target[i].name] = event.target[i].value
 
     }
-    fetch('http://127.0.0.1:5000/api/users/', {
+    fetch('http://192.168.99.100:5000/api/users', {
         method: 'POST',
         body: JSON.stringify(utilisateur),
         headers: {

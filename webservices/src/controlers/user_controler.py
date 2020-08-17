@@ -12,23 +12,23 @@ import jsonpickle
 
 class UsersControler(FlaskView):
     # définition d'une route de base
-    route_base = '/api/users/'
+    route_base = '/api/users'
 
     # dééfinition de l'extension de la route de base
-    @route('')
+    @route('/')
     def get_users(self):  # definition d'une méthode pour récupérer les users depuis le service
         users = userService.get_users()  # users récupérer depuis le service
-        return users
+        return users, 200
 
-    @route('<int:user_id>')
+    @route('/<int:user_id>')
     def get_user_by_id(self, user_id):
         user = userService.get_user_by_id(user_id)
-        return user
+        return user, 200
 
-    @route('<user_name>')
+    @route('/<user_name>')
     def get_user_by_name(self, user_name):
         user = userService.get_user_by_name(user_name)
-        return user
+        return user, 200
 
     @route('/', methods=['POST'])
     def create_user(self):
@@ -41,9 +41,9 @@ class UsersControler(FlaskView):
         user = userDto(nom, prenom, naissance, email, login, password)
         print(user)
         
-        return userService.create_user(user)
+        return userService.create_user(user), 201
 
-    @route('<int:user_id>', methods=['PUT'])
+    @route('/<int:user_id>', methods=['PUT'])
     def update_user(self, user_id):
         nom = request.json['nom']
         prenom = request.json['prenom']
@@ -55,24 +55,24 @@ class UsersControler(FlaskView):
         user = userService.get_user_by_id(user_id)
         user= json.loads(user)
         user = userDto(user['nom'], user['prenom'], naissance['naissance'], email['email'], login['login'], password['password'])
-        return jsonify(userService.update_user(user_id,userUpdate, user))
+        return jsonify(userService.update_user(user_id,userUpdate, user)), 200
 
-    @route('<int:user_id>', methods=['DELETE'])
+    @route('/<int:user_id>', methods=['DELETE'])
     def delete_user(self, user_id):
         result = userService.delete_user(user_id)
-        return jsonify(result)
+        return jsonify(result), 200
 
 
-    @route('login', methods=['GET','POST'])
-    def login(self):
-        if request.method == 'POST' :
-            session.pop('user_id', None)
+    # @route('login', methods=['GET','POST'])
+    # def login(self):
+    #     if request.method == 'POST' :
+    #         session.pop('user_id', None)
 
-            login = request.json['login']
-            password = request.json['password']
-            user_request = userDto("","","","",login, password)
+    #         login = request.json['login']
+    #         password = request.json['password']
+    #         user_request = userDto("","","","",login, password)
 
-        return userService.connect_user(user_request)
+    #     return userService.connect_user(user_request)
 
 
     # @route('profile')
